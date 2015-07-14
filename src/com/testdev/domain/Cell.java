@@ -1,6 +1,7 @@
 package com.testdev.domain;
 
 /**
+ * Cell of the matrix that contains information whether the cell is empty.
  * Created by oleh.krupenia on 7/14/2015.
  */
 public class Cell {
