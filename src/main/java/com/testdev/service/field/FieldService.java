@@ -22,6 +22,8 @@ public class FieldService implements IFieldService {
 
     @Override
     public int validateField() {
+        for (int i = 0; i < Field.SIZE; i++) {
+        }
         return 0;
     }
 
