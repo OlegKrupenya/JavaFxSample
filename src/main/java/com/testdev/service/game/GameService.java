@@ -8,8 +8,11 @@ import com.testdev.service.game.state.UserOneState;
  */
 public class GameService implements IGameService {
 
+    private Context context = new Context();
+
     @Override
-    public String getCellText(Context context) {
+    public String getCellText() {
+        context.request();
         return context.getState() instanceof UserOneState ? "X" : "0";
     }
 }

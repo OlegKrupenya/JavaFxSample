@@ -7,6 +7,7 @@ import com.testdev.service.game.IGameService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.text.Font;
 
 public class Controller {
@@ -28,6 +29,8 @@ public class Controller {
     private Button btn8;
     @FXML
     private Button btn9;
+    @FXML
+    private Label lblResult;
 
     private IFieldService fieldService = new FieldService();
     private IGameService gameService = new GameService();
@@ -35,8 +38,19 @@ public class Controller {
     @FXML
     public void onBtnMouseClick(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getTarget();
-        clickedButton.setText("X");
+        String data = gameService.getCellText();
+        fieldService.populateField(data, getRow(clickedButton), getColumn(clickedButton));
+        clickedButton.setText(data);
         clickedButton.setFont(Font.font(25));
+
+    }
+
+    private int getColumn(Button clickedButton) {
+        return 0;
+    }
+
+    private int getRow(Button clickedButton) {
+        return 0;
     }
 
 }

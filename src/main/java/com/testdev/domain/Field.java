@@ -13,13 +13,18 @@ public class Field {
     /**
      * Data that contains current information about the game
      */
-    private Cell[][] data = new Cell[SIZE][SIZE];
+    private Cell[][] data;
+
+    public Field() {
+        this.data = new Cell[SIZE][SIZE];
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                this.data[i][j] = new Cell();
+            }
+        }
+    }
 
     public Cell[][] getData() {
         return data;
-    }
-
-    public void setData(Cell[][] data) {
-        this.data = data;
     }
 }

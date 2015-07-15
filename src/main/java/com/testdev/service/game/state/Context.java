@@ -4,7 +4,7 @@ package com.testdev.service.game.state;
  * Created by oleh.krupenia on 7/15/2015.
  */
 public class Context {
-    private GameState state;
+    private GameState state = new UserTwoState();
 
     public GameState getState() {
         return state;

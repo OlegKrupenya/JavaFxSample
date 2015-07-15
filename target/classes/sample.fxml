@@ -23,5 +23,8 @@
             <Button fx:id="btn8" minWidth="100" minHeight="100" onAction="#onBtnMouseClick"/>
             <Button fx:id="btn9" minWidth="100" minHeight="100" onAction="#onBtnMouseClick"/>
         </HBox>
+        <HBox>
+            <Label fx:id="lblResult" text="Player 1's turn" />
+        </HBox>
     </VBox>
 </GridPane>
