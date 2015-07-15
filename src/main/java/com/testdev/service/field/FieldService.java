@@ -23,7 +23,21 @@ public class FieldService implements IFieldService {
     @Override
     public int validateField() {
         for (int i = 0; i < Field.SIZE; i++) {
-
+            if (field.getData()[i][0].equals(field.getData()[i][1])
+                    && field.getData()[i][1].equals(field.getData()[i][2])) {
+                return field.getData()[i][0].isCross() ? 1 : 2;
+            }
+        }
+        for (int j = 0; j < Field.SIZE; j++) {
+            if (field.getData()[0][j].equals(field.getData()[1][j])
+                    && field.getData()[1][j].equals(field.getData()[2][j])) {
+                return field.getData()[0][j].isCross() ? 1 : 2;
+            }
+        }
+        if ((field.getData()[0][0].equals(field.getData()[1][1])
+                && field.getData()[1][1].equals(field.getData()[2][2])) || (field.getData()[0][2].equals(field.getData()[1][1])
+                && field.getData()[1][1].equals(field.getData()[2][0]))) {
+            return field.getData()[1][1].isCross() ? 1 : 2;
         }
         return 0;
     }

@@ -13,6 +13,25 @@ public class Cell {
     private boolean cross;
     private boolean zero;
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Cell cell = (Cell) o;
+
+        if (cross != cell.cross) return false;
+        return zero == cell.zero;
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = (cross ? 1 : 0);
+        result = 31 * result + (zero ? 1 : 0);
+        return result;
+    }
+
     public boolean isCross() {
         return cross;
     }

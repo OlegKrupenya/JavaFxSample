@@ -49,7 +49,7 @@ public class FieldServiceTest {
         this.fieldService.populateField("0", 0, 2);
 
         int res = this.fieldService.validateField();
-        Assert.assertTrue(res == 1);
+        Assert.assertTrue(res == 2);
 
         this.fieldService.clear();
         this.fieldService.populateField("X", 1, 1);
@@ -60,6 +60,6 @@ public class FieldServiceTest {
         this.fieldService.populateField("0", 0, 2);
 
         res = this.fieldService.validateField();
-        Assert.assertTrue(res == 1);
+        Assert.assertTrue(res == 2);
     }
 }
