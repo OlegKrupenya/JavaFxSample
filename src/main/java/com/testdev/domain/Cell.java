@@ -19,9 +19,7 @@ public class Cell {
         if (o == null || getClass() != o.getClass()) return false;
 
         Cell cell = (Cell) o;
-
-        if (cross != cell.cross) return false;
-        return zero == cell.zero;
+        return this.cross == cell.isCross() && this.zero == cell.isZero();
 
     }
 

@@ -40,9 +40,19 @@ public class Controller {
         Button clickedButton = (Button) actionEvent.getTarget();
         String data = gameService.getCellText();
         fieldService.populateField(data, getRow(clickedButton), getColumn(clickedButton));
+        if (data.equals("X")) {
+            lblResult.setText("Player 2's turn");
+        } else {
+            lblResult.setText("Player 1's turn");
+        }
         clickedButton.setText(data);
         clickedButton.setFont(Font.font(25));
-
+        int result = fieldService.validateField();
+        if (result == 1) {
+            lblResult.setText("Player 1's wins");
+        } else if (result == 2) {
+            lblResult.setText("Player 2's wins");
+        }
     }
 
     private int getColumn(Button clickedButton) {
