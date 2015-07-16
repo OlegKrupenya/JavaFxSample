@@ -12,24 +12,6 @@ import javafx.scene.text.Font;
 
 public class Controller {
     @FXML
-    private Button btn00;
-    @FXML
-    private Button btn01;
-    @FXML
-    private Button btn02;
-    @FXML
-    private Button btn10;
-    @FXML
-    private Button btn11;
-    @FXML
-    private Button btn12;
-    @FXML
-    private Button btn20;
-    @FXML
-    private Button btn21;
-    @FXML
-    private Button btn22;
-    @FXML
     private Label lblResult;
 
     private IFieldService fieldService = new FieldService();
