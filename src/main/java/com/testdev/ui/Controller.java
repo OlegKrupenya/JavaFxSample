@@ -12,23 +12,23 @@ import javafx.scene.text.Font;
 
 public class Controller {
     @FXML
-    private Button btn1;
+    private Button btn00;
     @FXML
-    private Button btn2;
+    private Button btn01;
     @FXML
-    private Button btn3;
+    private Button btn02;
     @FXML
-    private Button btn4;
+    private Button btn10;
     @FXML
-    private Button btn5;
+    private Button btn11;
     @FXML
-    private Button btn6;
+    private Button btn12;
     @FXML
-    private Button btn7;
+    private Button btn20;
     @FXML
-    private Button btn8;
+    private Button btn21;
     @FXML
-    private Button btn9;
+    private Button btn22;
     @FXML
     private Label lblResult;
 
@@ -56,11 +56,11 @@ public class Controller {
     }
 
     private int getColumn(Button clickedButton) {
-        return 0;
+        return Integer.parseInt(String.valueOf(clickedButton.getId().charAt(4)));
     }
 
     private int getRow(Button clickedButton) {
-        return 0;
+        return Integer.parseInt(String.valueOf(clickedButton.getId().charAt(3)));
     }
 
 }
