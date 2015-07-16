@@ -6,11 +6,17 @@ import com.testdev.service.game.GameService;
 import com.testdev.service.game.IGameService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 
 public class Controller {
+    @FXML
+    private VBox btnContainer;
     @FXML
     private Label lblResult;
 
@@ -32,8 +38,25 @@ public class Controller {
         int result = fieldService.validateField();
         if (result == 1) {
             lblResult.setText("Player 1's wins");
+            btnContainer.setDisable(true);
         } else if (result == 2) {
             lblResult.setText("Player 2's wins");
+            btnContainer.setDisable(true);
+        }
+    }
+
+    @FXML
+    public void onMenuSelected(ActionEvent actionEvent) {
+        btnContainer.setDisable(false);
+        for (Node node : btnContainer.getChildren()) {
+            HBox hBox = (HBox) node;
+            for (Object child : hBox.getChildren()) {
+                if (child instanceof Button) {
+                    Button btn = (Button) child;
+                    btn.setText("");
+                    lblResult.setText("Player 1's turn");
+                }
+            }
         }
     }
 
