@@ -13,6 +13,7 @@ public class Main extends Application {
         Controller controller = SpringFXMLLoader.load("/sample.fxml");
         Scene scene = new Scene((Parent) controller.getView(), 300, 340);
         primaryStage.setTitle("Tic Tac Toe");
+        primaryStage.setResizable(false);
         primaryStage.setScene(scene);
         primaryStage.show();
     }
