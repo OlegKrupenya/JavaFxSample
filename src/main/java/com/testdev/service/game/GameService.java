@@ -5,6 +5,7 @@ import com.testdev.service.game.state.UserOneState;
 import com.testdev.service.game.state.UserTwoState;
 
 /**
+ * Service that controls the state of the game
  * Created by oleh.krupenia on 7/15/2015.
  */
 public class GameService implements IGameService {

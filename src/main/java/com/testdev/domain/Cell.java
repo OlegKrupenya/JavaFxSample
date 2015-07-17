@@ -10,7 +10,13 @@ package com.testdev.domain;
  * Created by oleh.krupenia on 7/14/2015.
  */
 public class Cell {
+    /**
+     * <code>true</code> if the value is cross
+     */
     private boolean cross;
+    /**
+     * <code>true</code> if the value is zero
+     */
     private boolean zero;
 
     @Override

@@ -1,13 +1,15 @@
 package com.testdev.service.field;
 
 import com.testdev.domain.Field;
+import org.springframework.beans.factory.annotation.Autowired;
 
 /**
  * Service that modifies and validates the field.
  * Created by oleh.krupenia on 7/15/2015.
  */
 public class FieldService implements IFieldService {
-    private final Field field = new Field();
+    @Autowired
+    private Field field;
 
     @Override
     public void populateField(String data, int row, int col) {

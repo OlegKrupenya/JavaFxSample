@@ -1,7 +1,7 @@
 package com.testdev.ui;
 
+import com.testdev.config.SpringFXMLLoader;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -10,9 +10,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("sample.fxml"));
+        Controller controller = SpringFXMLLoader.load("/sample.fxml");
+        Scene scene = new Scene((Parent) controller.getView(), 300, 340);
         primaryStage.setTitle("Tic Tac Toe");
-        primaryStage.setScene(new Scene(root, 300, 340));
+        primaryStage.setScene(scene);
         primaryStage.show();
     }
 

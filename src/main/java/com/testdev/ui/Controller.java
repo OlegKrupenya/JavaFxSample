@@ -13,18 +13,45 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
+/**
+ * Controller of the application.
+ */
 public class Controller {
+    /**
+     * Container of the buttons.
+     */
     @FXML
     private VBox btnContainer;
+    /**
+     * Label that displays information to the user.
+     */
     @FXML
     private Label lblResult;
 
-    private IFieldService fieldService = new FieldService();
+    /**
+     * Service that modifies and validates the field.
+     */
+    @Autowired
+    private IFieldService fieldService;
 
-    private IGameService gameService = new GameService();
+    /**
+     * Service that controls the state of the game.
+     */
+    @Autowired
+    private IGameService gameService;
 
+    /**
+     * A loaded object hierarchy from a FXML document.
+     */
+    private Node view;
+
+    /**
+     * Handles actionEvent when the user clicks the buttons.
+     * @param actionEvent ActionEvent when the user clicks the buttons.
+     */
     @FXML
     public void onBtnMouseClick(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getTarget();
@@ -53,6 +80,10 @@ public class Controller {
         }
     }
 
+    /**
+     * Handles actionEvent when the user selects option of the menu.
+     * @param actionEvent ActionEvent when the user when the user selects option of the menu.
+     */
     @FXML
     public void onMenuSelected(ActionEvent actionEvent) {
         btnContainer.setDisable(false);
@@ -70,12 +101,36 @@ public class Controller {
         }
     }
 
+    /**
+     * Returns index of the column by id of the button.
+     * @param clickedButton The button that has been clicked.
+     * @return index of the column by id of the button.
+     */
     private int getColumn(Button clickedButton) {
         return Integer.parseInt(String.valueOf(clickedButton.getId().charAt(4)));
     }
 
+    /**
+     * Returns index of the row by id of the button.
+     * @param clickedButton The button that has been clicked.
+     * @return index of the row by id of the button.
+     */
     private int getRow(Button clickedButton) {
         return Integer.parseInt(String.valueOf(clickedButton.getId().charAt(3)));
     }
 
+    /**
+     * Sets the view.
+     * @param view The loaded object hierarchy.
+     */
+    public void setView(Node view) {
+        this.view = view;
+    }
+
+    /**
+     * @return The loaded object hierarchy.
+     */
+    public Node getView() {
+        return view;
+    }
 }
