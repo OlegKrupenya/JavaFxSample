@@ -1,26 +1,26 @@
 package com.testdev.service.field;
 
-import org.junit.After;
+import com.testdev.domain.Field;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.test.context.ContextConfiguration;
+import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.support.AnnotationConfigContextLoader;
 
 /**
  * Tests for FieldService
  * Created by oleh.krupenia on 7/15/2015.
  */
+@RunWith(SpringJUnit4ClassRunner.class)
+@ContextConfiguration(loader = AnnotationConfigContextLoader.class)
 public class FieldServiceTest {
+
+    @Autowired
     private IFieldService fieldService;
-
-    @Before
-    public void before() {
-        this.fieldService = new FieldService();
-    }
-
-    @After
-    public void after() {
-        this.fieldService = null;
-    }
 
     @Test
     public void shouldPlayerOneWinIfFirstRowContainsCross() {
@@ -61,5 +61,19 @@ public class FieldServiceTest {
 
         res = this.fieldService.validateField();
         Assert.assertTrue(res == 2);
+    }
+
+    @Configuration
+    static class ContextConfiguration {
+
+        @Bean
+        public IFieldService orderService() {
+            return new FieldService();
+        }
+
+        @Bean
+        public Field field() {
+            return new Field();
+        }
     }
 }
