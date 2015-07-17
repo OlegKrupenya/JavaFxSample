@@ -1,15 +1,13 @@
 package com.testdev.ui;
 
-import com.testdev.service.field.FieldService;
 import com.testdev.service.field.IFieldService;
-import com.testdev.service.game.GameService;
-import com.testdev.service.game.IGameService;
+import com.testdev.service.game.state.Context;
+import com.testdev.service.game.state.UserOneState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -38,10 +36,10 @@ public class Controller {
     private IFieldService fieldService;
 
     /**
-     * Service that controls the state of the game.
+     * Context that defines an interface to the client.
      */
     @Autowired
-    private IGameService gameService;
+    private Context context;
 
     /**
      * A loaded object hierarchy from a FXML document.
@@ -58,14 +56,7 @@ public class Controller {
         if (!StringUtils.isEmpty(clickedButton.getText())) {
             return;
         }
-        String data = gameService.getCellText();
-        fieldService.populateField(data, getRow(clickedButton), getColumn(clickedButton));
-        if (data.equals("X")) {
-            lblResult.setText("Player 2's turn");
-        } else {
-            lblResult.setText("Player 1's turn");
-        }
-        clickedButton.setText(data);
+        context.request(lblResult, clickedButton, fieldService);
         clickedButton.setFont(Font.font(25));
         int result = fieldService.validateField();
         if (result == 1) {
@@ -88,7 +79,7 @@ public class Controller {
     public void onMenuSelected(ActionEvent actionEvent) {
         btnContainer.setDisable(false);
         fieldService.clear();
-        gameService.resetGame();
+        context.setState(new UserOneState());
         for (Node node : btnContainer.getChildren()) {
             HBox hBox = (HBox) node;
             for (Object child : hBox.getChildren()) {
@@ -99,24 +90,6 @@ public class Controller {
                 }
             }
         }
-    }
-
-    /**
-     * Returns index of the column by id of the button.
-     * @param clickedButton The button that has been clicked.
-     * @return index of the column by id of the button.
-     */
-    private int getColumn(Button clickedButton) {
-        return Integer.parseInt(String.valueOf(clickedButton.getId().charAt(4)));
-    }
-
-    /**
-     * Returns index of the row by id of the button.
-     * @param clickedButton The button that has been clicked.
-     * @return index of the row by id of the button.
-     */
-    private int getRow(Button clickedButton) {
-        return Integer.parseInt(String.valueOf(clickedButton.getId().charAt(3)));
     }
 
     /**

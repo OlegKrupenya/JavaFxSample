@@ -3,8 +3,7 @@ package com.testdev.config;
 import com.testdev.domain.Field;
 import com.testdev.service.field.FieldService;
 import com.testdev.service.field.IFieldService;
-import com.testdev.service.game.GameService;
-import com.testdev.service.game.IGameService;
+import com.testdev.service.game.state.Context;
 import com.testdev.ui.Controller;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -23,6 +22,11 @@ public class AppConfig {
     }
 
     @Bean
+    public Context context() {
+        return new Context();
+    }
+
+    @Bean
     public Controller controller() {
         return new Controller();
     }
@@ -30,10 +34,5 @@ public class AppConfig {
     @Bean
     public IFieldService fieldService() {
         return new FieldService();
-    }
-
-    @Bean
-    public IGameService gameService() {
-        return new GameService();
     }
 }
