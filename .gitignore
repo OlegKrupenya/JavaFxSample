@@ -17,6 +17,9 @@ bin
 build
 **/build
 
+target
+**/target
+
 *.iml
 **/*.iml
 
