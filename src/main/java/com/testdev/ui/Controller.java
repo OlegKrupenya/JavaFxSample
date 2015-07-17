@@ -13,6 +13,7 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
+import org.springframework.util.StringUtils;
 
 public class Controller {
     @FXML
@@ -21,11 +22,15 @@ public class Controller {
     private Label lblResult;
 
     private IFieldService fieldService = new FieldService();
+
     private IGameService gameService = new GameService();
 
     @FXML
     public void onBtnMouseClick(ActionEvent actionEvent) {
         Button clickedButton = (Button) actionEvent.getTarget();
+        if (!StringUtils.isEmpty(clickedButton.getText())) {
+            return;
+        }
         String data = gameService.getCellText();
         fieldService.populateField(data, getRow(clickedButton), getColumn(clickedButton));
         if (data.equals("X")) {
@@ -37,10 +42,13 @@ public class Controller {
         clickedButton.setFont(Font.font(25));
         int result = fieldService.validateField();
         if (result == 1) {
-            lblResult.setText("Player 1's wins");
+            lblResult.setText("Player 1 won");
             btnContainer.setDisable(true);
         } else if (result == 2) {
-            lblResult.setText("Player 2's wins");
+            lblResult.setText("Player 2 won");
+            btnContainer.setDisable(true);
+        } else if (result == 3) {
+            lblResult.setText("Tie game");
             btnContainer.setDisable(true);
         }
     }
@@ -48,6 +56,8 @@ public class Controller {
     @FXML
     public void onMenuSelected(ActionEvent actionEvent) {
         btnContainer.setDisable(false);
+        fieldService.clear();
+        gameService.resetGame();
         for (Node node : btnContainer.getChildren()) {
             HBox hBox = (HBox) node;
             for (Object child : hBox.getChildren()) {

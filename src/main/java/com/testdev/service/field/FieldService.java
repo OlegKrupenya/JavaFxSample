@@ -22,7 +22,11 @@ public class FieldService implements IFieldService {
 
     @Override
     public int validateField() {
+        boolean hasEmptyCells = false;
         for (int i = 0; i < Field.SIZE; i++) {
+            if (field.getData()[i][0].isEmpty() || field.getData()[i][1].isEmpty() || field.getData()[i][2].isEmpty()) {
+                hasEmptyCells = true;
+            }
             if (field.getData()[i][0].equals(field.getData()[i][1])
                     && field.getData()[i][1].equals(field.getData()[i][2]) && !field.getData()[i][1].isEmpty()) {
                 return field.getData()[i][0].isCross() ? 1 : 2;
@@ -40,7 +44,10 @@ public class FieldService implements IFieldService {
                 && field.getData()[1][1].equals(field.getData()[2][0]))) {
             return field.getData()[1][1].isCross() ? 1 : 2;
         }
-        return 0;
+        if (hasEmptyCells) {
+            return 0;
+        }
+        return 3;
     }
 
     @Override

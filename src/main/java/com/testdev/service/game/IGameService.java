@@ -7,4 +7,5 @@ import com.testdev.service.game.state.Context;
  */
 public interface IGameService {
     String getCellText();
+    void resetGame();
 }
