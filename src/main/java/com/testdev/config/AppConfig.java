@@ -14,7 +14,6 @@ import org.springframework.context.annotation.Configuration;
  * Created by oleh.krupenia on 7/17/2015.
  */
 @Configuration
-@ComponentScan("com.testdev.domain")
 public class AppConfig {
     @Bean
     public Field field() {
