@@ -21,6 +21,14 @@ import org.springframework.util.StringUtils;
  * Controller of the application.
  */
 public class Controller {
+    public static final String PLAYER_1_WON = "Player 1 won";
+    public static final String TIE_GAME = "Tie game";
+    public static final String PLAYER_1_S_TURN = "Player 1's turn";
+    public static final String SINGLE_MODE = "single";
+    public static final String COMPUTER_PLAYER_WON = "Computer player won";
+    public static final String PLAYER_2_WON = "Player 2 won";
+    public static final String BTN_ID_PREFIX = "btn";
+    public static final String EMPTY_TEXT = "";
     /**
      * Container of the buttons.
      */
@@ -61,10 +69,10 @@ public class Controller {
         }
         context.request(lblResult, clickedButton, fieldService);
         clickedButton.setFont(Font.font(25));
-        checkValidationResult();
-        if (context.getState() instanceof ComputerPlayerState) {
+        checkValidationResult(PLAYER_2_WON);
+        if (context.getState() instanceof ComputerPlayerState && !PLAYER_1_WON.equals(lblResult.getText())) {
             int[] indexes = fieldService.getFreeCell();
-            String btnId = "btn" + indexes[0] + indexes[1];
+            String btnId = BTN_ID_PREFIX + indexes[0] + indexes[1];
             for (Node node : btnContainer.getChildren()) {
                 HBox hBox = (HBox) node;
                 for (Object child : hBox.getChildren()) {
@@ -79,7 +87,7 @@ public class Controller {
             }
             clickedButton.setFont(Font.font(25));
             context.request(lblResult, clickedButton, fieldService);
-            checkValidationResult();
+            checkValidationResult(COMPUTER_PLAYER_WON);
         }
     }
 
@@ -92,7 +100,7 @@ public class Controller {
         MenuItem target = (MenuItem) actionEvent.getTarget();
         btnContainer.setDisable(false);
         fieldService.clear();
-        if (target.getId().equals("single")) {
+        if (target.getId().equals(SINGLE_MODE)) {
             context.setState(new SinglePlayerOneState());
         } else {
             context.setState(new UserOneState());
@@ -102,8 +110,8 @@ public class Controller {
             for (Object child : hBox.getChildren()) {
                 if (child instanceof Button) {
                     Button btn = (Button) child;
-                    btn.setText("");
-                    lblResult.setText("Player 1's turn");
+                    btn.setText(EMPTY_TEXT);
+                    lblResult.setText(PLAYER_1_S_TURN);
                 }
             }
         }
@@ -126,18 +134,19 @@ public class Controller {
 
     /**
      * Verifies current state of the game.
+     * @param player2Message Message that will be shown when player 2 wins
      */
-    private void checkValidationResult() {
+    private void checkValidationResult(String player2Message) {
         int result;
         result = fieldService.validateField();
         if (result == 1) {
-            lblResult.setText("Player 1 won");
+            lblResult.setText(PLAYER_1_WON);
             btnContainer.setDisable(true);
         } else if (result == 2) {
-            lblResult.setText("Computer player won");
+            lblResult.setText(player2Message);
             btnContainer.setDisable(true);
         } else if (result == 3) {
-            lblResult.setText("Tie game");
+            lblResult.setText(TIE_GAME);
             btnContainer.setDisable(true);
         }
     }
