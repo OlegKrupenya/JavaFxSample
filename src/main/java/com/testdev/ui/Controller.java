@@ -1,13 +1,16 @@
 package com.testdev.ui;
 
 import com.testdev.service.field.IFieldService;
+import com.testdev.ui.game.state.ComputerPlayerState;
 import com.testdev.ui.game.state.Context;
+import com.testdev.ui.game.state.SinglePlayerOneState;
 import com.testdev.ui.game.state.UserOneState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
@@ -69,6 +72,25 @@ public class Controller {
             lblResult.setText("Tie game");
             btnContainer.setDisable(true);
         }
+        if (context.getState() instanceof ComputerPlayerState) {
+            int[] indexes = fieldService.getFreeCell();
+            String btnId = "btn" + indexes[0] + indexes[1];
+            for (Node node : btnContainer.getChildren()) {
+                HBox hBox = (HBox) node;
+                for (Object child : hBox.getChildren()) {
+                    if (child instanceof Button) {
+                        Button btn = (Button) child;
+                        if (btnId.equals(btn.getId())) {
+                            clickedButton = btn;
+                            break;
+                        }
+                    }
+                }
+            }
+            clickedButton.setFont(Font.font(25));
+            context.request(lblResult, clickedButton, fieldService);
+            checkValidationResult();
+        }
     }
 
     /**
@@ -77,9 +99,14 @@ public class Controller {
      */
     @FXML
     public void onMenuSelected(ActionEvent actionEvent) {
+        MenuItem target = (MenuItem) actionEvent.getTarget();
         btnContainer.setDisable(false);
         fieldService.clear();
-        context.setState(new UserOneState());
+        if (target.getId().equals("single")) {
+            context.setState(new SinglePlayerOneState());
+        } else {
+            context.setState(new UserOneState());
+        }
         for (Node node : btnContainer.getChildren()) {
             HBox hBox = (HBox) node;
             for (Object child : hBox.getChildren()) {
@@ -105,5 +132,23 @@ public class Controller {
      */
     public Node getView() {
         return view;
+    }
+
+    /**
+     * Verifies current state of the game.
+     */
+    private void checkValidationResult() {
+        int result;
+        result = fieldService.validateField();
+        if (result == 1) {
+            lblResult.setText("Player 1 won");
+            btnContainer.setDisable(true);
+        } else if (result == 2) {
+            lblResult.setText("Computer player won");
+            btnContainer.setDisable(true);
+        } else if (result == 3) {
+            lblResult.setText("Tie game");
+            btnContainer.setDisable(true);
+        }
     }
 }

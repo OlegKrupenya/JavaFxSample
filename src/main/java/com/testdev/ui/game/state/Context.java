@@ -33,6 +33,10 @@ public class Context {
         this.state = state;
     }
 
+    public GameState getState() {
+        return this.state;
+    }
+
     public Label getLblResult() {
         return lblResult;
     }

@@ -25,4 +25,9 @@ public interface IFieldService {
      * Clears the field. All cells will be empty.
      */
     void clear();
+
+    /**
+     * @return Array that contains a row and a column of a free cell for computer player.
+     */
+    int[] getFreeCell();
 }

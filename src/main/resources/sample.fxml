@@ -15,7 +15,8 @@
             <menus>
                 <Menu text="Game">
                     <items>
-                        <MenuItem text="New" onAction="#onMenuSelected"/>
+                        <MenuItem id="single" text="New Singleplayer Game" onAction="#onMenuSelected"/>
+                        <MenuItem id="multi" text="New Multiplayer Game" onAction="#onMenuSelected"/>
                     </items>
                 </Menu>
             </menus>

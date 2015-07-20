@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by oleh.krupenia on 7/15/2015.
  */
 public class FieldService implements IFieldService {
+    public static final int PAIR = 2;
     @Autowired
     private Field field;
 
@@ -60,5 +61,20 @@ public class FieldService implements IFieldService {
                 field.getData()[i][j].setZero(false);
             }
         }
+    }
+
+    @Override
+    public int[] getFreeCell() {
+        int[] result = new int[PAIR];
+        for (int i = 0; i < Field.SIZE; i++) {
+            for (int j = 0; j < Field.SIZE; j++) {
+                if (field.getData()[i][j].isEmpty()) {
+                    result[0] = i;
+                    result[1] = j;
+                    return result;
+                }
+            }
+        }
+        return result;
     }
 }
