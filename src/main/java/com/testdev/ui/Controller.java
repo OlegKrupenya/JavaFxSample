@@ -1,8 +1,8 @@
 package com.testdev.ui;
 
 import com.testdev.service.field.IFieldService;
-import com.testdev.service.game.state.Context;
-import com.testdev.service.game.state.UserOneState;
+import com.testdev.ui.game.state.Context;
+import com.testdev.ui.game.state.UserOneState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;

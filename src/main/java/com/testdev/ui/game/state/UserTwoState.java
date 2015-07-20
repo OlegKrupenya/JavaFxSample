@@ -1,6 +1,4 @@
-package com.testdev.service.game.state;
-
-import javafx.scene.control.Button;
+package com.testdev.ui.game.state;
 
 /**
  * Player 2 sets "0".

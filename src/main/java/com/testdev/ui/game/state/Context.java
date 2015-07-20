@@ -1,4 +1,4 @@
-package com.testdev.service.game.state;
+package com.testdev.ui.game.state;
 
 import com.testdev.service.field.IFieldService;
 import javafx.scene.control.Button;

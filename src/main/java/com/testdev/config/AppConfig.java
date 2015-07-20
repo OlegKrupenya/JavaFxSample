@@ -3,10 +3,9 @@ package com.testdev.config;
 import com.testdev.domain.Field;
 import com.testdev.service.field.FieldService;
 import com.testdev.service.field.IFieldService;
-import com.testdev.service.game.state.Context;
+import com.testdev.ui.game.state.Context;
 import com.testdev.ui.Controller;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 /**
