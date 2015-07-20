@@ -61,17 +61,7 @@ public class Controller {
         }
         context.request(lblResult, clickedButton, fieldService);
         clickedButton.setFont(Font.font(25));
-        int result = fieldService.validateField();
-        if (result == 1) {
-            lblResult.setText("Player 1 won");
-            btnContainer.setDisable(true);
-        } else if (result == 2) {
-            lblResult.setText("Player 2 won");
-            btnContainer.setDisable(true);
-        } else if (result == 3) {
-            lblResult.setText("Tie game");
-            btnContainer.setDisable(true);
-        }
+        checkValidationResult();
         if (context.getState() instanceof ComputerPlayerState) {
             int[] indexes = fieldService.getFreeCell();
             String btnId = "btn" + indexes[0] + indexes[1];
