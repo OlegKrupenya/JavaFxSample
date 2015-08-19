@@ -72,7 +72,7 @@ public class Controller {
         clickedButton.setFont(Font.font(25));
         checkValidationResult(PLAYER_2_WON);
         if (stateContext.getState() instanceof ComputerPlayerMadeMoveState && !PLAYER_1_WON.equals(lblResult.getText())) {
-            int[] indexes = fieldService.getFreeCell();
+            int[] indexes = fieldService.getCoordinatesOfFirstFreeCell();
             String btnId = BTN_ID_PREFIX + indexes[0] + indexes[1];
             for (Node node : btnContainer.getChildren()) {
                 HBox hBox = (HBox) node;

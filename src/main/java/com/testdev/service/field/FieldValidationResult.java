@@ -13,6 +13,10 @@ public enum FieldValidationResult {
         return value;
     }
 
+    public boolean isThereNoWinner() {
+        return this.value == 0 || this.value == 3;
+    }
+
     FieldValidationResult(int value) {
         this.value = value;
     }

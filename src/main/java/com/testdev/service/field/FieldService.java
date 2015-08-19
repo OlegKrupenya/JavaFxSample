@@ -29,5 +29,5 @@ public interface FieldService {
     /**
      * @return Array that contains a row and a column of a free cell for computer player.
      */
-    int[] getFreeCell();
+    int[] getCoordinatesOfFirstFreeCell();
 }
