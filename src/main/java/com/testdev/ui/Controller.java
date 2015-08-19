@@ -108,13 +108,11 @@ public class Controller {
         }
         for (Node node : btnContainer.getChildren()) {
             HBox hBox = (HBox) node;
-            for (Object child : hBox.getChildren()) {
-                if (child instanceof Button) {
-                    Button btn = (Button) child;
-                    btn.setText(EMPTY_TEXT);
-                    lblResult.setText(PLAYER_1_S_TURN);
-                }
-            }
+            hBox.getChildren().stream().filter(child -> child instanceof Button).forEach(child -> {
+                Button btn = (Button) child;
+                btn.setText(EMPTY_TEXT);
+                lblResult.setText(PLAYER_1_S_TURN);
+            });
         }
     }
 
