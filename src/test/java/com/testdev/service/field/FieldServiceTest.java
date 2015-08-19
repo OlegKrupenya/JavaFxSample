@@ -28,8 +28,8 @@ public class FieldServiceTest {
         this.fieldService.populateField("X", 0, 1);
         this.fieldService.populateField("X", 0, 2);
 
-        int res = this.fieldService.validateField();
-        Assert.assertTrue(res == 1);
+        FieldValidationResult res = this.fieldService.validateField();
+        Assert.assertTrue(res.getValue() == 1);
 
         this.fieldService.clear();
         this.fieldService.populateField("X", 0, 0);
@@ -39,7 +39,7 @@ public class FieldServiceTest {
         this.fieldService.populateField("X", 0, 2);
 
         res = this.fieldService.validateField();
-        Assert.assertTrue(res == 1);
+        Assert.assertTrue(res.getValue() == 1);
     }
 
     @Test
@@ -48,8 +48,8 @@ public class FieldServiceTest {
         this.fieldService.populateField("0", 0, 1);
         this.fieldService.populateField("0", 0, 2);
 
-        int res = this.fieldService.validateField();
-        Assert.assertTrue(res == 2);
+        FieldValidationResult res = this.fieldService.validateField();
+        Assert.assertTrue(res.getValue() == 2);
 
         this.fieldService.clear();
         this.fieldService.populateField("X", 1, 1);
@@ -60,7 +60,7 @@ public class FieldServiceTest {
         this.fieldService.populateField("0", 0, 2);
 
         res = this.fieldService.validateField();
-        Assert.assertTrue(res == 2);
+        Assert.assertTrue(res.getValue() == 2);
     }
 
     @Configuration

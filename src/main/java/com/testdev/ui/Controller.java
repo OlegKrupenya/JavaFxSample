@@ -1,5 +1,6 @@
 package com.testdev.ui;
 
+import com.testdev.service.field.FieldValidationResult;
 import com.testdev.service.field.IFieldService;
 import com.testdev.ui.game.state.ComputerPlayerState;
 import com.testdev.ui.game.state.StateContext;
@@ -137,15 +138,15 @@ public class Controller {
      * @param player2Message Message that will be shown when player 2 wins
      */
     private void checkValidationResult(String player2Message) {
-        int result;
+        FieldValidationResult result;
         result = fieldService.validateField();
-        if (result == 1) {
+        if (result == FieldValidationResult.PLAYER_ONE_WON) {
             lblResult.setText(PLAYER_1_WON);
             btnContainer.setDisable(true);
-        } else if (result == 2) {
+        } else if (result == FieldValidationResult.PLAYER_TWO_WON) {
             lblResult.setText(player2Message);
             btnContainer.setDisable(true);
-        } else if (result == 3) {
+        } else if (result == FieldValidationResult.TIE_GAME) {
             lblResult.setText(TIE_GAME);
             btnContainer.setDisable(true);
         }

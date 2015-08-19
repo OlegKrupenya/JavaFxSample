@@ -2,7 +2,6 @@ package com.testdev.config;
 import com.testdev.ui.Controller;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
-import javafx.util.Callback;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import java.io.IOException;

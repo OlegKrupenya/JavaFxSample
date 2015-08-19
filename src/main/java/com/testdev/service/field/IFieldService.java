@@ -19,7 +19,7 @@ public interface IFieldService {
      * @return 0 - if there is no winner yet and it is possible to continue the game. 1 - if the winner is player 1.
      * 2 - if the winner is player 2. 3 - if there is a tie game.
      */
-    int validateField();
+    FieldValidationResult validateField();
 
     /**
      * Clears the field. All cells will be empty.
