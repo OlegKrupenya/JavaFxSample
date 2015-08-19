@@ -4,6 +4,7 @@ import javafx.scene.control.Button;
 
 /**
  * Interface of the state of the game.
+ * @see Design pattern State
  * Created by oleh.krupenia on 7/15/2015.
  */
 public abstract class GameState {

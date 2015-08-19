@@ -1,17 +1,17 @@
 package com.testdev.ui.game.state;
 
 /**
- * Player 2 sets "0".
- * Created by oleh.krupenia on 7/15/2015.
+ * State of the game when the computer player made its move.
+ * @see Design pattern State
+ * Created by oleh.krupenia on 7/20/2015.
  */
-public class UserTwoState extends GameState {
+public class ComputerPlayerMadeMoveState extends GameState {
     @Override
     public void handle(StateContext stateContext) {
         stateContext.getClickedButton().setText("0");
         stateContext.getLblResult().setText("Player 1's turn");
         stateContext.getFieldService().populateField("0", getRow(stateContext.getClickedButton()),
                 getColumn(stateContext.getClickedButton()));
-        stateContext.setState(new UserOneState());
+        stateContext.setState(new SinglePlayerOneClickedState());
     }
-
 }

@@ -5,14 +5,15 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
- * Context that defines an interface to the client. @see Pattern State.
+ * Context that defines an interface to the client.
+ * @see Pattern State.
  * Created by oleh.krupenia on 7/15/2015.
  */
 public class StateContext {
     /**
      * The current state
      */
-    private GameState state = new UserOneState();
+    private GameState state = new UserOneClickedState();
 
     /**
      * Label to set the message.

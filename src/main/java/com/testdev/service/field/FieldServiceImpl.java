@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * Created by oleh.krupenia on 7/15/2015.
  */
 public class FieldServiceImpl implements FieldService {
+    public static final int KEY_VALUE_PAIR = 2;
     @Autowired
     private Field field;
 
@@ -20,10 +21,6 @@ public class FieldServiceImpl implements FieldService {
             field.getData()[row][col].setCross(false);
             field.getData()[row][col].setZero(true);
         }
-    }
-
-    public FieldServiceImpl() {
-        super();
     }
 
     @Override
@@ -68,7 +65,7 @@ public class FieldServiceImpl implements FieldService {
 
     @Override
     public int[] getFreeCell() {
-        int[] result = new int[2];
+        int[] result = new int[KEY_VALUE_PAIR];
         for (int i = 0; i < Field.SIZE; i++) {
             for (int j = 0; j < Field.SIZE; j++) {
                 if (field.getData()[i][j].isEmpty()) {

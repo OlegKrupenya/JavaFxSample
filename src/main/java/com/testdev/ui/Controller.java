@@ -2,10 +2,10 @@ package com.testdev.ui;
 
 import com.testdev.service.field.FieldValidationResult;
 import com.testdev.service.field.FieldService;
-import com.testdev.ui.game.state.ComputerPlayerState;
+import com.testdev.ui.game.state.ComputerPlayerMadeMoveState;
 import com.testdev.ui.game.state.StateContext;
-import com.testdev.ui.game.state.SinglePlayerOneState;
-import com.testdev.ui.game.state.UserOneState;
+import com.testdev.ui.game.state.SinglePlayerOneClickedState;
+import com.testdev.ui.game.state.UserOneClickedState;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -71,7 +71,7 @@ public class Controller {
         stateContext.request(lblResult, clickedButton, fieldService);
         clickedButton.setFont(Font.font(25));
         checkValidationResult(PLAYER_2_WON);
-        if (stateContext.getState() instanceof ComputerPlayerState && !PLAYER_1_WON.equals(lblResult.getText())) {
+        if (stateContext.getState() instanceof ComputerPlayerMadeMoveState && !PLAYER_1_WON.equals(lblResult.getText())) {
             int[] indexes = fieldService.getFreeCell();
             String btnId = BTN_ID_PREFIX + indexes[0] + indexes[1];
             for (Node node : btnContainer.getChildren()) {
@@ -102,9 +102,9 @@ public class Controller {
         btnContainer.setDisable(false);
         fieldService.clear();
         if (target.getId().equals(SINGLE_MODE)) {
-            stateContext.setState(new SinglePlayerOneState());
+            stateContext.setState(new SinglePlayerOneClickedState());
         } else {
-            stateContext.setState(new UserOneState());
+            stateContext.setState(new UserOneClickedState());
         }
         for (Node node : btnContainer.getChildren()) {
             HBox hBox = (HBox) node;
