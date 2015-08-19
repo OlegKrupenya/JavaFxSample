@@ -17,10 +17,10 @@ import org.springframework.test.context.support.AnnotationConfigContextLoader;
  */
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(loader = AnnotationConfigContextLoader.class)
-public class FieldServiceTest {
+public class FieldServiceImplTest {
 
     @Autowired
-    private IFieldService fieldService;
+    private FieldService fieldService;
 
     @Test
     public void shouldPlayerOneWinIfFirstRowContainsCross() {
@@ -67,8 +67,8 @@ public class FieldServiceTest {
     static class ContextConfiguration {
 
         @Bean
-        public IFieldService orderService() {
-            return new FieldService();
+        public FieldService orderService() {
+            return new FieldServiceImpl();
         }
 
         @Bean

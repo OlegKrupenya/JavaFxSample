@@ -1,8 +1,8 @@
 package com.testdev.config;
 
 import com.testdev.domain.Field;
+import com.testdev.service.field.FieldServiceImpl;
 import com.testdev.service.field.FieldService;
-import com.testdev.service.field.IFieldService;
 import com.testdev.ui.game.state.StateContext;
 import com.testdev.ui.Controller;
 import org.springframework.context.annotation.Bean;
@@ -30,7 +30,7 @@ public class AppConfig {
     }
 
     @Bean
-    public IFieldService fieldService() {
-        return new FieldService();
+    public FieldService fieldService() {
+        return new FieldServiceImpl();
     }
 }

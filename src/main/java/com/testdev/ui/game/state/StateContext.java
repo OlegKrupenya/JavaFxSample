@@ -1,6 +1,6 @@
 package com.testdev.ui.game.state;
 
-import com.testdev.service.field.IFieldService;
+import com.testdev.service.field.FieldService;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
@@ -27,7 +27,7 @@ public class StateContext {
     /**
      * Service to populate data.
      */
-    private IFieldService fieldService;
+    private FieldService fieldService;
 
     public void setState(GameState state) {
         this.state = state;
@@ -45,14 +45,14 @@ public class StateContext {
         return clickedButton;
     }
 
-    public IFieldService getFieldService() {
+    public FieldService getFieldService() {
         return fieldService;
     }
 
     /**
      * Changes the state by user request.
      */
-    public void request(Label lblResult, Button clickedButton, IFieldService fieldService) {
+    public void request(Label lblResult, Button clickedButton, FieldService fieldService) {
         this.lblResult = lblResult;
         this.clickedButton = clickedButton;
         this.fieldService = fieldService;

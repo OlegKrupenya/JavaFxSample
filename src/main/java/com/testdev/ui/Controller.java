@@ -1,7 +1,7 @@
 package com.testdev.ui;
 
 import com.testdev.service.field.FieldValidationResult;
-import com.testdev.service.field.IFieldService;
+import com.testdev.service.field.FieldService;
 import com.testdev.ui.game.state.ComputerPlayerState;
 import com.testdev.ui.game.state.StateContext;
 import com.testdev.ui.game.state.SinglePlayerOneState;
@@ -45,7 +45,7 @@ public class Controller {
      * Service that modifies and validates the field.
      */
     @Autowired
-    private IFieldService fieldService;
+    private FieldService fieldService;
 
     /**
      * Context that defines an interface to the client.
