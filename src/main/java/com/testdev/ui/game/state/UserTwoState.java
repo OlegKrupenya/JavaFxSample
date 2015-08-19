@@ -6,12 +6,12 @@ package com.testdev.ui.game.state;
  */
 public class UserTwoState extends GameState {
     @Override
-    public void handle(Context context) {
-        context.getClickedButton().setText("0");
-        context.getLblResult().setText("Player 1's turn");
-        context.getFieldService().populateField("0", getRow(context.getClickedButton()),
-                getColumn(context.getClickedButton()));
-        context.setState(new UserOneState());
+    public void handle(StateContext stateContext) {
+        stateContext.getClickedButton().setText("0");
+        stateContext.getLblResult().setText("Player 1's turn");
+        stateContext.getFieldService().populateField("0", getRow(stateContext.getClickedButton()),
+                getColumn(stateContext.getClickedButton()));
+        stateContext.setState(new UserOneState());
     }
 
 }

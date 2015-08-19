@@ -5,10 +5,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 /**
- * Context that defines an interface to the client
+ * Context that defines an interface to the client. @see Pattern State.
  * Created by oleh.krupenia on 7/15/2015.
  */
-public class Context {
+public class StateContext {
     /**
      * The current state
      */

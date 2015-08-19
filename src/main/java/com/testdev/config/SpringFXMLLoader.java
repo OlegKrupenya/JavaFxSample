@@ -9,25 +9,24 @@ import java.io.IOException;
 import java.io.InputStream;
 
 /**
- * Custom loader.
+ * Custom loader that is needed for Spring in JavaFX applications.
  * Created by oleh.krupenia on 7/17/2015.
  */
 public class SpringFXMLLoader {
     private static final ApplicationContext APPLICATION_CONTEXT = new AnnotationConfigApplicationContext(AppConfig.class);
 
+    /**
+     * Loads FXML file and creates a contoller
+     * @param url Path to the resource
+     * @return Controller
+     */
     public static Controller load(String url) {
-        InputStream fxmlStream = null;
-        try {
-            fxmlStream = SpringFXMLLoader.class.getResourceAsStream(url);
-            FXMLLoader loader = new FXMLLoader();
-            loader.setControllerFactory(new Callback<Class<?>, Object>() {
-                @Override
-                public Object call(Class<?> aClass) {
-                    return APPLICATION_CONTEXT.getBean(aClass);
-                }
-            });
+        try (InputStream fxmlStream = SpringFXMLLoader.class.getResourceAsStream(url)) {
 
-            Node view = (Node) loader.load(fxmlStream);
+            FXMLLoader loader = new FXMLLoader();
+            loader.setControllerFactory(APPLICATION_CONTEXT::getBean);
+
+            Node view = loader.load(fxmlStream);
             Controller controller = loader.getController();
             controller.setView(view);
 
@@ -35,15 +34,6 @@ public class SpringFXMLLoader {
         } catch (IOException e) {
             System.out.println("Can't load resource");
             throw new RuntimeException(e);
-        } finally {
-            if (fxmlStream != null) {
-                try {
-                    fxmlStream.close();
-                } catch (IOException e) {
-                    System.out.println("Can't close stream");
-                }
-            }
         }
     }
-
 }

@@ -3,7 +3,7 @@ package com.testdev.config;
 import com.testdev.domain.Field;
 import com.testdev.service.field.FieldService;
 import com.testdev.service.field.IFieldService;
-import com.testdev.ui.game.state.Context;
+import com.testdev.ui.game.state.StateContext;
 import com.testdev.ui.Controller;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,8 +20,8 @@ public class AppConfig {
     }
 
     @Bean
-    public Context context() {
-        return new Context();
+    public StateContext context() {
+        return new StateContext();
     }
 
     @Bean

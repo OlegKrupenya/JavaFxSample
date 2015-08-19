@@ -5,11 +5,11 @@ package com.testdev.ui.game.state;
  */
 public class SinglePlayerOneState extends GameState {
     @Override
-    public void handle(Context context) {
-        context.getClickedButton().setText("X");
-        context.getLblResult().setText("Computer player's turn");
-        context.getFieldService().populateField("X", getRow(context.getClickedButton()),
-                getColumn(context.getClickedButton()));
-        context.setState(new ComputerPlayerState());
+    public void handle(StateContext stateContext) {
+        stateContext.getClickedButton().setText("X");
+        stateContext.getLblResult().setText("Computer player's turn");
+        stateContext.getFieldService().populateField("X", getRow(stateContext.getClickedButton()),
+                getColumn(stateContext.getClickedButton()));
+        stateContext.setState(new ComputerPlayerState());
     }
 }

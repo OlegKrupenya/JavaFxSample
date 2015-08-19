@@ -2,7 +2,7 @@ package com.testdev.ui;
 
 import com.testdev.service.field.IFieldService;
 import com.testdev.ui.game.state.ComputerPlayerState;
-import com.testdev.ui.game.state.Context;
+import com.testdev.ui.game.state.StateContext;
 import com.testdev.ui.game.state.SinglePlayerOneState;
 import com.testdev.ui.game.state.UserOneState;
 import javafx.event.ActionEvent;
@@ -50,7 +50,7 @@ public class Controller {
      * Context that defines an interface to the client.
      */
     @Autowired
-    private Context context;
+    private StateContext stateContext;
 
     /**
      * A loaded object hierarchy from a FXML document.
@@ -67,10 +67,10 @@ public class Controller {
         if (!StringUtils.isEmpty(clickedButton.getText())) {
             return;
         }
-        context.request(lblResult, clickedButton, fieldService);
+        stateContext.request(lblResult, clickedButton, fieldService);
         clickedButton.setFont(Font.font(25));
         checkValidationResult(PLAYER_2_WON);
-        if (context.getState() instanceof ComputerPlayerState && !PLAYER_1_WON.equals(lblResult.getText())) {
+        if (stateContext.getState() instanceof ComputerPlayerState && !PLAYER_1_WON.equals(lblResult.getText())) {
             int[] indexes = fieldService.getFreeCell();
             String btnId = BTN_ID_PREFIX + indexes[0] + indexes[1];
             for (Node node : btnContainer.getChildren()) {
@@ -86,7 +86,7 @@ public class Controller {
                 }
             }
             clickedButton.setFont(Font.font(25));
-            context.request(lblResult, clickedButton, fieldService);
+            stateContext.request(lblResult, clickedButton, fieldService);
             checkValidationResult(COMPUTER_PLAYER_WON);
         }
     }
@@ -101,9 +101,9 @@ public class Controller {
         btnContainer.setDisable(false);
         fieldService.clear();
         if (target.getId().equals(SINGLE_MODE)) {
-            context.setState(new SinglePlayerOneState());
+            stateContext.setState(new SinglePlayerOneState());
         } else {
-            context.setState(new UserOneState());
+            stateContext.setState(new UserOneState());
         }
         for (Node node : btnContainer.getChildren()) {
             HBox hBox = (HBox) node;

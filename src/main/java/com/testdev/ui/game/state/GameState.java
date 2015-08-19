@@ -9,9 +9,9 @@ import javafx.scene.control.Button;
 public abstract class GameState {
     /**
      * Changes the current state by user request.
-     * @param context Context that defines an interface to the client
+     * @param stateContext Context that defines an interface to the client
      */
-    public abstract void handle(Context context);
+    public abstract void handle(StateContext stateContext);
 
     /**
      * Returns index of the column by id of the button.
