@@ -69,7 +69,6 @@ public class Controller {
             return;
         }
         stateContext.request(lblResult, clickedButton, fieldService);
-        clickedButton.setFont(Font.font(25));
         checkValidationResult(PLAYER_2_WON);
         if (stateContext.getState() instanceof ComputerPlayerMadeMoveState && !PLAYER_1_WON.equals(lblResult.getText())) {
             int[] indexes = fieldService.getCoordinatesOfFirstFreeCell();
@@ -86,7 +85,6 @@ public class Controller {
                     }
                 }
             }
-            clickedButton.setFont(Font.font(25));
             stateContext.request(lblResult, clickedButton, fieldService);
             checkValidationResult(COMPUTER_PLAYER_WON);
         }
