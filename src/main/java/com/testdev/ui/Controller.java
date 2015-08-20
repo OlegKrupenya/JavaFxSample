@@ -14,7 +14,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -30,6 +29,8 @@ public class Controller {
     public static final String PLAYER_2_WON = "Player 2 won";
     public static final String BTN_ID_PREFIX = "btn";
     public static final String EMPTY_TEXT = "";
+    public static final int ROW = 0;
+    public static final int COLUMN = 1;
     /**
      * Container of the buttons.
      */
@@ -68,26 +69,52 @@ public class Controller {
         if (!StringUtils.isEmpty(clickedButton.getText())) {
             return;
         }
-        stateContext.request(lblResult, clickedButton, fieldService);
-        checkValidationResult(PLAYER_2_WON);
+        processHumanPlayerMove(clickedButton);
         if (stateContext.getState() instanceof ComputerPlayerMadeMoveState && !PLAYER_1_WON.equals(lblResult.getText())) {
-            int[] indexes = fieldService.getCoordinatesOfFirstFreeCell();
-            String btnId = BTN_ID_PREFIX + indexes[0] + indexes[1];
-            for (Node node : btnContainer.getChildren()) {
-                HBox hBox = (HBox) node;
-                for (Object child : hBox.getChildren()) {
-                    if (child instanceof Button) {
-                        Button btn = (Button) child;
-                        if (btnId.equals(btn.getId())) {
-                            clickedButton = btn;
-                            break;
-                        }
+            processComputerPlayerMove();
+        }
+    }
+
+    /**
+     * Sets text of the button and of the label, populates the field with the value and changes the state
+     * @param clickedButton Button that was clicked by the user
+     */
+    private void processHumanPlayerMove(Button clickedButton) {
+        stateContext.request(lblResult, clickedButton, fieldService);
+        checkValidationResult();
+    }
+
+    /**
+     * Selects the button for computer player, sets text of the button and of the label,
+     * populates the field with the value and changes the state
+     */
+    private void processComputerPlayerMove() {
+        Button clickedButton = getButtonForComputerPlayer();
+        stateContext.request(lblResult, clickedButton, fieldService);
+        checkValidationResult();
+    }
+
+    /**
+     * Selects a button for computer player by id with hardcoded coordinates.
+     * @return Button that was selected for computer player's move.
+     */
+    private Button getButtonForComputerPlayer() {
+        Button clickedButton = null;
+        int[] coordinatesOfFirstFreeCell = fieldService.getCoordinatesOfFirstFreeCell();
+        String btnId = BTN_ID_PREFIX + coordinatesOfFirstFreeCell[ROW] + coordinatesOfFirstFreeCell[COLUMN];
+        for (Node node : btnContainer.getChildren()) {
+            HBox hBox = (HBox) node;
+            for (Object child : hBox.getChildren()) {
+                if (child instanceof Button) {
+                    Button btn = (Button) child;
+                    if (btnId.equals(btn.getId())) {
+                        clickedButton = btn;
+                        break;
                     }
                 }
             }
-            stateContext.request(lblResult, clickedButton, fieldService);
-            checkValidationResult(COMPUTER_PLAYER_WON);
         }
+        return clickedButton;
     }
 
     /**
@@ -131,16 +158,19 @@ public class Controller {
 
     /**
      * Verifies current state of the game.
-     * @param player2Message Message that will be shown when player 2 wins
      */
-    private void checkValidationResult(String player2Message) {
+    private void checkValidationResult() {
         FieldValidationResult result;
         result = fieldService.validateField();
         if (result == FieldValidationResult.PLAYER_ONE_WON) {
             lblResult.setText(PLAYER_1_WON);
             btnContainer.setDisable(true);
         } else if (result == FieldValidationResult.PLAYER_TWO_WON) {
-            lblResult.setText(player2Message);
+            if (stateContext.getState() instanceof SinglePlayerOneClickedState) {
+                lblResult.setText(COMPUTER_PLAYER_WON);
+            } else {
+                lblResult.setText(PLAYER_2_WON);
+            }
             btnContainer.setDisable(true);
         } else if (result == FieldValidationResult.TIE_GAME) {
             lblResult.setText(TIE_GAME);
