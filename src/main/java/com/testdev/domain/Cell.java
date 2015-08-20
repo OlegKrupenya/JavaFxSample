@@ -5,7 +5,6 @@ package com.testdev.domain;
  *
  * Actually this class and {@link Field} class are redundant.
  * The field and be represented by just a matrix of strings.
- * I don't know why I created it :)
  *
  * Created by oleh.krupenia on 7/14/2015.
  */
