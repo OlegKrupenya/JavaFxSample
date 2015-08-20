@@ -96,12 +96,13 @@ public class Controller {
 
     /**
      * Selects a button for computer player by id with hardcoded coordinates.
+     * Currently it is the first empty cell.
      * @return Button that was selected for computer player's move.
      */
     private Button getButtonForComputerPlayer() {
         Button clickedButton = null;
-        int[] coordinatesOfFirstFreeCell = fieldService.getCoordinatesOfFirstFreeCell();
-        String btnId = BTN_ID_PREFIX + coordinatesOfFirstFreeCell[ROW] + coordinatesOfFirstFreeCell[COLUMN];
+        int[] coordinatesOfFirstEmptyCell = fieldService.getCoordinatesOfFirstEmptyCell();
+        String btnId = BTN_ID_PREFIX + coordinatesOfFirstEmptyCell[ROW] + coordinatesOfFirstEmptyCell[COLUMN];
         for (Node node : btnContainer.getChildren()) {
             HBox hBox = (HBox) node;
             for (Object child : hBox.getChildren()) {

@@ -27,7 +27,7 @@ public interface FieldService {
     void clear();
 
     /**
-     * @return Array that contains a row and a column of a free cell for computer player.
+     * @return Array that contains a row and a column of a empty cell for computer player.
      */
-    int[] getCoordinatesOfFirstFreeCell();
+    int[] getCoordinatesOfFirstEmptyCell();
 }

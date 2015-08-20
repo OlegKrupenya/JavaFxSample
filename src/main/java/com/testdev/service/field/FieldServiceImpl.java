@@ -110,7 +110,7 @@ public class FieldServiceImpl implements FieldService {
     }
 
     @Override
-    public int[] getCoordinatesOfFirstFreeCell() {
+    public int[] getCoordinatesOfFirstEmptyCell() {
         int[] result = new int[KEY_VALUE_PAIR];
         for (int i = 0; i < Field.SIZE; i++) {
             for (int j = 0; j < Field.SIZE; j++) {
